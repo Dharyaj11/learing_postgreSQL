@@ -28,6 +28,7 @@ export default function ShopDetails() {
           <h1 className="text-center display-1">
             {selectedShop.shops.name}
           </h1>
+          
         </>
         )}
     </div>
