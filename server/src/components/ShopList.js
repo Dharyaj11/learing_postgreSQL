@@ -20,7 +20,19 @@ export default function ShopList() {
     }
     fetchData();
   },[]);
-
+  const handleDelete = async (e, id) => {
+    e.stopPropagation();
+    try {
+      const response = await ShopFinder.delete(`/${id}`);
+      setShop(
+        shop.filter((restaurant) => {
+          return restaurant.id !== id;
+        })
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="list-group">
         <table className="table table-hover table-dark">
@@ -56,7 +68,7 @@ export default function ShopList() {
                   </td>
                   <td>
                     <button
-                      // onClick={(e) => handleDelete(e, restaurant.id)}
+                      onClick={(e) => handleDelete(e, restaurant.id)}
                       className="btn btn-danger"
                     >
                       Delete

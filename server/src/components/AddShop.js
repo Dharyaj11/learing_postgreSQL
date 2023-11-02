@@ -1,6 +1,29 @@
-import React from 'react'
+import React,{useState,useContext} from 'react'
+import { ShopContext } from '../context/ShopContext';
+import ShopFinder from '../apis/ShopFinder';
 
 export default function AddShop() {
+
+    const { addShops } = useContext(ShopContext);
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [priceRange, setPriceRange] = useState("Price Range");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await ShopFinder.post("/", {
+        name:name ,
+        location:location,
+        price_range: priceRange,
+      });
+      console.log(response.data.data);
+      addShops(response.data.data.shops);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
          <div className="mb-4">
@@ -8,8 +31,8 @@ export default function AddShop() {
                     <div className="form-row">
                         <div className="col">
                             <input
-                                //   value={name}
-                                //   onChange={(e) => setName(e.target.value)}
+                                  value={name}
+                                  onChange={(e) => setName(e.target.value)}
                                 type="text"
                                 className="form-control"
                                 placeholder="name"
@@ -17,8 +40,8 @@ export default function AddShop() {
                         </div>
                         <div className="col">
                             <input
-                                //   value={location}
-                                //   onChange={(e) => setLocation(e.target.value)}
+                                  value={location}
+                                  onChange={(e) => setLocation(e.target.value)}
                                 className="form-control"
                                 type="text"
                                 placeholder="location"
@@ -26,8 +49,8 @@ export default function AddShop() {
                         </div>
                         <div className="col">
                             <select
-                                //   value={priceRange}
-                                //   onChange={(e) => setPriceRange(e.target.value)}
+                                  value={priceRange}
+                                  onChange={(e) => setPriceRange(e.target.value)}
                                 className="custom-select my-1 mr-sm-2"
                             >
                                 <option disabled>Price Range</option>
@@ -39,7 +62,7 @@ export default function AddShop() {
                             </select>
                         </div>
                         <button
-                            // onClick={handleSubmit}
+                            onClick={handleSubmit}
                             type="submit"
                             className="btn btn-primary"
                         >
