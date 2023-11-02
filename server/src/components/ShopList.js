@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useEffect,useContext } from 'react'
+import ShopFinder from '../apis/ShopFinder'
+import { ShopContext } from '../context/ShopContext';
 
 export default function ShopList() {
+
+  const {shop,setShop} = useContext(ShopContext)
+  useEffect(()=>{
+    
+    async function fetchData(){
+    try {
+
+        const response =await ShopFinder.get("/");
+        // console.log(response);
+        setShop(response.data.data.shops)
+
+      } catch (error) {
+        
+      }
+    }
+    fetchData();
+  },[]);
+
   return (
     <div className="list-group">
         <table className="table table-hover table-dark">
@@ -11,24 +31,24 @@ export default function ShopList() {
             <th scope="col">Price Range</th>
             <th scope="col">Ratings</th>
             <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            {/* <th scope="col">Delete</th> */}
           </tr>
         </thead>
-        {/*<tbody>
-          {restaurants &&
-            restaurants.map((restaurant) => {
+        <tbody>
+          {shop &&
+            shop.map((restaurant) => {
               return (
                 <tr
-                  onClick={() => handleRestaurantSelect(restaurant.id)}
+                  // onClick={() => handleRestaurantSelect(restaurant.id)}
                   key={restaurant.id}
                 >
                   <td>{restaurant.name}</td>
                   <td>{restaurant.location}</td>
                   <td>{"$".repeat(restaurant.price_range)}</td>
-                  <td>{renderRating(restaurant)}</td>
+                  {/* <td>{renderRating(restaurant)}</td> */}
                   <td>
                     <button
-                      onClick={(e) => handleUpdate(e, restaurant.id)}
+                      // onClick={(e) => handleUpdate(e, restaurant.id)}
                       className="btn btn-warning"
                     >
                       Update
@@ -36,7 +56,7 @@ export default function ShopList() {
                   </td>
                   <td>
                     <button
-                      onClick={(e) => handleDelete(e, restaurant.id)}
+                      // onClick={(e) => handleDelete(e, restaurant.id)}
                       className="btn btn-danger"
                     >
                       Delete
@@ -44,8 +64,8 @@ export default function ShopList() {
                   </td>
                 </tr>
               );
-            })} */}
-          <tr>
+            })}
+          {/* <tr>
             <td>mcdonalds</td>
             <td>New YOrk</td>
             <td>$$</td>
@@ -69,8 +89,8 @@ export default function ShopList() {
             <td>
               <button className="btn btn-danger">Delete</button>
             </td>
-          </tr>
-        {/* </tbody> */}
+          </tr> */}
+        </tbody>
       </table>
     </div>
   )

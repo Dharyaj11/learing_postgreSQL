@@ -9,7 +9,7 @@ router.get("/shops",async(req,res)=>{
       // console.log(global.food_items);
       
       const result=await db.query("select * from shop");
-      console.log(result);
+      // console.log(result);
       res.status(200).json({
         status:"success",
         result: result.rows.length,

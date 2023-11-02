@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 const db=require("../db/index")
 
-router.post("/newshops",async(req,res)=>{
+router.post("/shops",async(req,res)=>{
 
     try {
       // console.log(global.food_items);
@@ -24,7 +24,7 @@ router.post("/newshops",async(req,res)=>{
   }
   })
 
-  router.put("/updateshops/:id",async(req,res)=>{
+  router.put("/shops/:id",async(req,res)=>{
 
     try {
       // console.log(global.food_items);
@@ -44,7 +44,7 @@ router.post("/newshops",async(req,res)=>{
       
   }
   })
-  router.delete("/deleteshops/:id",async(req,res)=>{
+  router.delete("/shops/:id",async(req,res)=>{
 
     try {
       // console.log(global.food_items);
