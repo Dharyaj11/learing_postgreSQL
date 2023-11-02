@@ -8,6 +8,7 @@ import {
 import Home from './screens/Home';
 import Update from './screens/Update';
 import { ShopContextProvider } from './context/ShopContext';
+import ShopDetails from './screens/ShopDetails';
 function App() {
   return (
     <>
@@ -18,7 +19,8 @@ function App() {
       <div className='container'>
         <Routes>
           <Route exact path="/" element={<Home/>}/>
-          <Route exact path="/update" element={<Update/>}/>
+          <Route exact path="/shops/:id/update" element={<Update/>}/>
+          <Route exact path="/shops/:id" element={<ShopDetails/>}/>
           
         </Routes>
       </div>

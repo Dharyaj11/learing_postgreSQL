@@ -1,10 +1,11 @@
 import React, { useEffect,useContext } from 'react'
 import ShopFinder from '../apis/ShopFinder'
 import { ShopContext } from '../context/ShopContext';
-
+import { useNavigate } from "react-router-dom";
 export default function ShopList() {
 
   const {shop,setShop} = useContext(ShopContext)
+  let navigate=useNavigate();
   useEffect(()=>{
     
     async function fetchData(){
@@ -33,6 +34,15 @@ export default function ShopList() {
       console.log(err);
     }
   };
+  const handleUpdate = (e, id) => {
+    e.stopPropagation();
+    navigate(`/shops/${id}/update`);
+  };
+  const handleRestaurantSelect = (id) => {
+    navigate(`/shops/${id}`);
+  };
+
+
   return (
     <div className="list-group">
         <table className="table table-hover table-dark">
@@ -51,7 +61,7 @@ export default function ShopList() {
             shop.map((restaurant) => {
               return (
                 <tr
-                  // onClick={() => handleRestaurantSelect(restaurant.id)}
+                  onClick={() => handleRestaurantSelect(restaurant.id)}
                   key={restaurant.id}
                 >
                   <td>{restaurant.name}</td>
@@ -60,7 +70,7 @@ export default function ShopList() {
                   {/* <td>{renderRating(restaurant)}</td> */}
                   <td>
                     <button
-                      // onClick={(e) => handleUpdate(e, restaurant.id)}
+                      onClick={(e) => handleUpdate(e, restaurant.id)}
                       className="btn btn-warning"
                     >
                       Update

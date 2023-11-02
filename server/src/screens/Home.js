@@ -7,6 +7,7 @@ export default function Home() {
   return (
     <div>
         <Navbar/>
+        <h1 className="text-center">Shop Finder</h1>
         <AddShop/>
         <ShopList/>
         Home
