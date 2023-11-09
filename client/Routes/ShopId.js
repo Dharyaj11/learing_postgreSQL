@@ -11,15 +11,13 @@ router.get("/shops/:id",async(req,res)=>{
 
       
     //   const result=await db.query(`select * from shop where id= ${req.params.id}`);
-      const shop=await db.query("select * from shop where id= $1",[req.params.id]);
-      const reviews=await db.query("select * from reviews where restaurant_id= $1",[req.params.id]);
-      // console.log(result.rows[0]);
+      const result=await db.query("select * from shop where id= $1",[req.params.id]);
+      console.log(result.rows[0]);
       res.status(200).json({
         status:"success",
         result: result.rows.length,
         data: {
-          shops:shop.rows[0],
-          reviews:reviews.rows
+          shops:result.rows[0],
         }
       });
   } catch (error) {
